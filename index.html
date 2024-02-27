@@ -21,7 +21,7 @@
     <!-- Main -->
     <main>
         <!-- Section -->
-        <section>
+        <section style="display: none;">
             <article class="entrainement_wrapper">
                 <div class="entrainement_content_1">
                     <div class="entrainement_text">
@@ -42,7 +42,7 @@
             </article>
         </section>
         <!-- Section -->
-        <section class="">
+        <section style="display: none;" class="">
             <div class="conception_wrapper">
                 <div class="conception_content_1">
                     <img src="img/icons/icon-stethoscope.svg" alt="icon de stéthoscope"/>
@@ -118,7 +118,7 @@
                         <div class="parcours_progress">
                             <div class="parcours_phase phase_1">
                                 <div class="parcours_phase_title">
-                                    <h3 class="titre_phase_1">Phase 1/3</h3>
+                                    <h3 id="titre_phase_1">Phase 1/3</h3>
                                     <p id="phase_1"></p>
                                 </div>
                                 <div class="progress_bar_wrapper">
@@ -146,8 +146,6 @@
                                             <img src="img/icons/ok.svg" alt="">
                                         </div>
                                     </div>
-                                    <div class="progress_bar"></div>
-                                    <div class="progress_fill"></div>
                                 </div>
                                 <div class="parcours_phase_text">
                                     <p id="texte_phase_2"></p>
@@ -155,7 +153,7 @@
                             </div>
                             <div id="phase_3_container" class="parcours_phase phase_3">
                                 <div class="parcours_phase_title">
-                                    <h3 class="titre_phase_3">Phase 3/3</h3>
+                                    <h3 id="titre_phase_3">Phase 3/3</h3>
                                     <p id="phase_3"></p>
                                 </div>
                                 <div class="progress_bar_wrapper">
@@ -180,6 +178,49 @@
                             </div>
                         </div>
                     </div>
+                    <!-- Responsive parcours -->
+                    <div class="parcours_content_mobile">
+                        <div class="parcours_img_mobile">
+                            <img class="parcours_img" src="img/medecin-1.png">
+                            <button id="open_popup" class="parcours_img_button absolute">
+                                <span>Voir plus</span>
+                                <img src="img/icons/open.svg" alt="">
+                            </button>
+                        </div>
+                        <div class="parcours_text_mobile">
+                            <h3 id="titre_phase_1_mobile">Phase 1/3</h3>
+                            <p id="phase_1_mobile"></p>
+                            <p class="text_mobile" id="texte_phase_1_mobile"></p>
+                        </div>
+                    </div>
+                    <div id="phase_2_container_mobile" class="parcours_content_mobile">
+                        <div class="parcours_img_mobile">
+                            <img class="parcours_img" src="img/medecin-2.png">
+                            <button id="open_popup" class="parcours_img_button absolute">
+                                <span>Voir plus</span>
+                                <img src="img/icons/open.svg" alt="">
+                            </button>
+                        </div>
+                        <div class="parcours_text_mobile">
+                            <h3 id="titre_phase_2_mobile">Phase 2/3</h3>
+                            <p id="phase_2_mobile"></p>
+                            <p class="text_mobile" id="texte_phase_2_mobile"></p>
+                        </div>
+                    </div>
+                    <div id="phase_3_container_mobile" class="parcours_content_mobile">
+                        <div class="parcours_img_mobile">
+                            <img class="parcours_img" src="img/medecin-3.png">
+                            <button id="open_popup" class="parcours_img_button absolute">
+                                <span>Voir plus</span>
+                                <img src="img/icons/open.svg" alt="">
+                            </button>
+                        </div>
+                        <div class="parcours_text_mobile">
+                            <h3 id="titre_phase_3_mobile">Phase 3/3</h3>
+                            <p id="phase_3_mobile"></p>
+                            <p class="text_mobile" id="texte_phase_3_mobile"></p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -202,19 +243,19 @@
         <div class="popup_container">
             <div class="popup">
                 <div class="popup_content">
-                    <h3 class="popup_title">Étape 1</h3>
-                    <p>Urna nec ut at commodo nullam neque sit dignissim proin. Arcu sed netus est commodo sagittis est. Urna nec ut at commodo nullam neque sit dignissim proin.</p>
+                    <h3 class="popup_title"></h3>
+                    <p class="popup_text"></p>
                     <button id="btn_close_popup" class="parcours_img_button">Compris !</button>
                 </div>
                 <div>
-                    <img src="img/iphone-7.png" alt="">
+                    <img class="popup_img" src="" alt="">
                 </div>
                 <button id="close_popup">X</button>
               </div>
         </div>
     </main>
     <!-- Footer -->
-    <footer>
+    <footer style="display: none;">
         <a href="index.html" class="ecos-alpha">
             <img class="logo_ecos-alpha" src="img/logo_ecos-alpha.svg">
             <p>ECOS Alpha</p>
