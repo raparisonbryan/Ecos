@@ -188,8 +188,10 @@ document.addEventListener("scroll", function () {
     }
   });
 
-  if (lastActivePhaseIndex !== -1) {
-    updatePopupContent(lastActivePhaseIndex);
+  if (window.innerWidth > 1024) {
+    if (lastActivePhaseIndex !== -1) {
+      updatePopupContent(lastActivePhaseIndex);
+    }
   }
 });
 
@@ -222,6 +224,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // Fonction pour ouvrir la popup
   function openPopup() {
     popupContainer.classList.add("active");
+    console.log("popup ouverte");
   }
 
   // Fonction pour fermer la popup
@@ -229,6 +232,11 @@ document.addEventListener("DOMContentLoaded", function () {
     popupContainer.classList.remove("active");
   }
 
+  document.querySelectorAll(".parcours_img_button").forEach((button) => {
+    button.addEventListener("click", function () {
+      openPopup();
+    });
+  });
   openButton.addEventListener("click", openPopup);
   closeButton.addEventListener("click", closePopup);
   closeX.addEventListener("click", closePopup);
@@ -291,8 +299,52 @@ function updatePopupContent(phaseIndex) {
         "L'évaluateur termine son évaluation, même après 8 minutes. Le médecin a ensuite accès à la grille et la correction détaillée";
       popupImage.src = "./img/iphone-8.png";
       break;
+    case 3:
+      popupTitle.textContent = "Étape 1";
+      popupTitle.style.background =
+        "linear-gradient(87deg, #0A68CF 3.41%, #469EFF 28.39%)";
+      popupTitle.style.backgroundClip = "text";
+      popupTitle.style.webkitBackgroundClip = "text";
+      popupTitle.style.webkitTextFillColor = "transparent";
+      popupText.textContent =
+        "Le patient prend connaissance de sa fiche, et l'évaluateur de sa grille. Lorsqu'ils sont prêts, le médecin lance le chronomètre pour lire les consignes";
+      popupImage.src = "./img/iphone-10.png";
+      break;
+    case 4:
+      popupTitle.textContent = "Étape 2";
+      popupTitle.style.background =
+        "linear-gradient(265deg, #FFE9E9 65.15%, #FF7474 79.87%)";
+      popupTitle.style.backgroundClip = "text";
+      popupTitle.style.webkitBackgroundClip = "text";
+      popupTitle.style.webkitTextFillColor = "transparent";
+      popupText.textContent =
+        "Lorsqu'il est prêt, le médecin lance un nouveau chronomètre pour lancer la partie";
+      popupImage.src = "./img/iphone-10.png";
+      break;
+    case 5:
+      popupTitle.textContent = "Étape 3";
+      popupTitle.style.background =
+        "linear-gradient(260deg, #FFEED3 54.11%, #FFB850 83.54%)";
+      popupTitle.style.backgroundClip = "text";
+      popupTitle.style.webkitBackgroundClip = "text";
+      popupTitle.style.webkitTextFillColor = "transparent";
+      popupText.textContent =
+        "L'évaluateur termine son évaluation, même après 8 minutes. Le médecin a ensuite accès à la grille et la correction détaillée";
+      popupImage.src = "./img/iphone-9.png";
+      break;
   }
 }
+
+//onglets mobile
+document.getElementById("btn_phase_1").addEventListener("click", function () {
+  updatePopupContent(3);
+});
+document.getElementById("btn_phase_2").addEventListener("click", function () {
+  updatePopupContent(4);
+});
+document.getElementById("btn_phase_3").addEventListener("click", function () {
+  updatePopupContent(5);
+});
 
 //Onglets
 function changeTab() {

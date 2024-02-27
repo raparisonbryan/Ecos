@@ -955,6 +955,13 @@ footer nav .link{
     .text_mobile {
         color: #7B9EC4;
     }
+    .popup {
+        padding: 20px 20px;
+        gap: 20px;
+    }
+    .popup_content {
+        width: 200px;
+    }
 }
 
 @media screen and (max-width: 768px) {
@@ -967,6 +974,26 @@ footer nav .link{
     p {
         font-size: 14px;
     }
+    .popup {
+        flex-direction: column-reverse;
+        width: 80%;
+        gap: 5px;
+    }
+    .popup_content {
+        width: 100%;
+    }
+    .popup_img {
+        display: block; 
+        -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 90%);
+        mask-image: linear-gradient(to bottom, black 50%, transparent 90%);
+    }
+    .mobile {
+        width: 100%;
+        padding: 10px 15px; 
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 }
 
 @media screen and (max-width: 450px) {
@@ -978,3 +1005,4 @@ footer nav .link{
         padding: 20px 20px;
     }
 }
+
