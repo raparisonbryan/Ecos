@@ -204,9 +204,7 @@ const observer = new MutationObserver(function (mutations) {
     }
   });
 });
-
 const phases = document.querySelectorAll(".parcours_phase");
-
 phases.forEach(function (phase) {
   observer.observe(phase, {
     attributes: true,
@@ -387,6 +385,7 @@ function changeTab() {
 function changeTabMobile() {
   document.addEventListener("DOMContentLoaded", function () {
     const links = document.querySelectorAll(".parcours_nav a");
+    const navBackground = document.querySelector(".nav-background");
     const phase_1 = document.getElementById("phase_1_mobile");
     const phase_2 = document.getElementById("phase_2_mobile");
     const phase_3 = document.getElementById("phase_3_mobile");
@@ -404,6 +403,11 @@ function changeTabMobile() {
     links.forEach((link) => {
       link.addEventListener("click", function (e) {
         e.preventDefault();
+
+        const linkWidth = this.offsetWidth;
+        const linkLeftOffset = this.offsetLeft;
+        navBackground.style.width = `${linkWidth}px`;
+        navBackground.style.transform = `translateX(${linkLeftOffset}px)`;
 
         document
           .querySelector(".parcours_nav a.active")
