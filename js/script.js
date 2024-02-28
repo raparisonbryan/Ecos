@@ -160,12 +160,13 @@ document.addEventListener("scroll", function () {
 
   phases.forEach((phase, index) => {
     let phaseTop = phase.getBoundingClientRect().top;
+    let phaseDisplay = window.getComputedStyle(phase).display;
 
     if (phase.classList.contains("phase-active")) {
       lastActivePhaseIndex = index;
     }
 
-    if (phaseTop < triggerPoint) {
+    if (phaseTop < triggerPoint && phaseDisplay !== "none") {
       phase.classList.add("phase-active");
 
       if (imagesParRole[roleActif] && imagesParRole[roleActif][index]) {
@@ -348,184 +349,179 @@ document.getElementById("btn_phase_3").addEventListener("click", function () {
 
 //Onglets
 function changeTab() {
-  document.addEventListener("DOMContentLoaded", function () {
-    const links = document.querySelectorAll(".parcours_nav a");
-    const navBackground = document.querySelector(".nav-background");
-    const phase_1 = document.getElementById("phase_1");
-    const phase_2 = document.getElementById("phase_2");
-    const phase_3 = document.getElementById("phase_3");
-    const texte_1 = document.getElementById("texte_phase_1");
-    const texte_2 = document.getElementById("texte_phase_2");
-    const texte_3 = document.getElementById("texte_phase_3");
-    const phase_1_numero = document.getElementById("titre_phase_1");
-    const phase_2_numero = document.getElementById("titre_phase_2");
-    const phase_3_numero = document.getElementById("titre_phase_3");
-    const image = document.querySelector(".parcours_img");
-    const phase_3_container = document.getElementById("phase_3_container");
-    const phase_2_container = document.getElementById("phase_2_container");
+  const links = document.querySelectorAll(".parcours_nav a");
+  const navBackground = document.querySelector(".nav-background");
+  const phase_1 = document.getElementById("phase_1");
+  const phase_2 = document.getElementById("phase_2");
+  const phase_3 = document.getElementById("phase_3");
+  const texte_1 = document.getElementById("texte_phase_1");
+  const texte_2 = document.getElementById("texte_phase_2");
+  const texte_3 = document.getElementById("texte_phase_3");
+  const phase_1_numero = document.getElementById("titre_phase_1");
+  const phase_2_numero = document.getElementById("titre_phase_2");
+  const phase_3_numero = document.getElementById("titre_phase_3");
+  const image = document.querySelector(".parcours_img");
+  const phase_3_container = document.getElementById("phase_3_container");
+  const phase_2_container = document.getElementById("phase_2_container");
 
-    links.forEach((link) => {
-      link.addEventListener("click", function (e) {
-        e.preventDefault();
+  links.forEach((link) => {
+    link.addEventListener("click", function (e) {
+      e.preventDefault();
 
-        const linkWidth = this.offsetWidth;
-        const linkLeftOffset = this.offsetLeft;
-        navBackground.style.width = `${linkWidth}px`;
-        navBackground.style.transform = `translateX(${linkLeftOffset}px)`;
+      const linkWidth = this.offsetWidth;
+      const linkLeftOffset = this.offsetLeft;
+      navBackground.style.width = `${linkWidth}px`;
+      navBackground.style.transform = `translateX(${linkLeftOffset}px)`;
 
-        document
-          .querySelector(".parcours_nav a.active")
-          ?.classList.remove("active");
-        this.classList.add("active");
+      document
+        .querySelector(".parcours_nav a.active")
+        ?.classList.remove("active");
+      this.classList.add("active");
 
-        roleActif = this.getAttribute("data-role");
-        image.src = imagesParRole[roleActif][0];
+      roleActif = this.getAttribute("data-role");
+      image.src = imagesParRole[roleActif][0];
 
-        const role = this.getAttribute("data-role");
+      const role = this.getAttribute("data-role");
 
-        switch (role) {
-          case "medecin":
-            phase_1.textContent = "Préparation des joueurs";
-            texte_1.textContent =
-              "Préparation des étudiants. Le patient prend connaissance de sa fiche, et l'évaluateur de sa grille. Lorsqu'ils sont prêts, le médecin lance le chronomètre pour lire les consignes";
-            phase_2.textContent = "Simulation";
-            texte_2.textContent =
-              "Lorsqu'il est prêt, le médecin lance un nouveau chronomètre pour lancer la partie";
-            phase_3.textContent = "Résultat";
-            texte_3.textContent =
-              "L'évaluateur termine son évaluation, même après 8 minutes. Le médecin a ensuite accès à la grille et la correction détaillée";
-            phase_3_container.style.display = "flex";
-            phase_1_numero.textContent = "Phase 1/3";
-            phase_2_numero.textContent = "Phase 2/3";
-            phase_3_numero.textContent = "Phase 3/3";
-            break;
-          case "patient":
-            phase_1.textContent = "Préparation des joueurs";
-            texte_1.textContent = "Test tab 2";
-            phase_2.textContent = "Simulation";
-            texte_2.textContent = "Test tab 2";
-            phase_1_numero.textContent = "Phase 1/2";
-            phase_2_numero.textContent = "Phase 2/2";
-            phase_2_container.style.marginBottom = "300px";
-            phase_3_container.style.display = "none";
-            break;
-          case "evaluateur":
-            phase_1.textContent = "Préparation des joueurs";
-            texte_1.textContent = "Test tab 3";
-            phase_2.textContent = "Simulation";
-            texte_2.textContent = "Test tab 3";
-            phase_3.textContent = "Résultat";
-            texte_3.textContent = "Test tab 3";
-            phase_3_container.style.display = "flex";
-            phase_1_numero.textContent = "Phase 1/3";
-            phase_2_numero.textContent = "Phase 2/3";
-            phase_3_numero.textContent = "Phase 3/3";
-            break;
-        }
-        adjustProgressBar();
-      });
+      switch (role) {
+        case "medecin":
+          phase_1.textContent = "Préparation des joueurs";
+          texte_1.textContent =
+            "Préparation des étudiants. Le patient prend connaissance de sa fiche, et l'évaluateur de sa grille. Lorsqu'ils sont prêts, le médecin lance le chronomètre pour lire les consignes";
+          phase_2.textContent = "Simulation";
+          texte_2.textContent =
+            "Lorsqu'il est prêt, le médecin lance un nouveau chronomètre pour lancer la partie";
+          phase_3.textContent = "Résultat";
+          texte_3.textContent =
+            "L'évaluateur termine son évaluation, même après 8 minutes. Le médecin a ensuite accès à la grille et la correction détaillée";
+          phase_3_container.style.display = "flex";
+          phase_1_numero.textContent = "Phase 1/3";
+          phase_2_numero.textContent = "Phase 2/3";
+          phase_3_numero.textContent = "Phase 3/3";
+          break;
+        case "patient":
+          phase_1.textContent = "Préparation des joueurs";
+          texte_1.textContent = "Test tab 2";
+          phase_2.textContent = "Simulation";
+          texte_2.textContent = "Test tab 2";
+          phase_1_numero.textContent = "Phase 1/2";
+          phase_2_numero.textContent = "Phase 2/2";
+          phase_2_container.style.marginBottom = "300px";
+          phase_3_container.style.display = "none";
+          break;
+        case "evaluateur":
+          phase_1.textContent = "Préparation des joueurs";
+          texte_1.textContent = "Test tab 3";
+          phase_2.textContent = "Simulation";
+          texte_2.textContent = "Test tab 3";
+          phase_3.textContent = "Résultat";
+          texte_3.textContent = "Test tab 3";
+          phase_3_container.style.display = "flex";
+          phase_1_numero.textContent = "Phase 1/3";
+          phase_2_numero.textContent = "Phase 2/3";
+          phase_3_numero.textContent = "Phase 3/3";
+          break;
+      }
+      adjustProgressBar();
     });
-    document.querySelector(".parcours_nav a[data-role='medecin']").click();
-
-    if (links.length > 0) {
-      links[0].dispatchEvent(new Event("click"));
-    }
   });
+  document.querySelector(".parcours_nav a[data-role='medecin']").click();
+
+  if (links.length > 0) {
+    links[0].dispatchEvent(new Event("click"));
+  }
 }
 
 //Onglets responsive
 function changeTabMobile() {
-  document.addEventListener("DOMContentLoaded", function () {
-    const links = document.querySelectorAll(".parcours_nav a");
-    const navBackground = document.querySelector(".nav-background");
-    const phase_1 = document.getElementById("phase_1_mobile");
-    const phase_2 = document.getElementById("phase_2_mobile");
-    const phase_3 = document.getElementById("phase_3_mobile");
-    const texte_1 = document.getElementById("texte_phase_1_mobile");
-    const texte_2 = document.getElementById("texte_phase_2_mobile");
-    const texte_3 = document.getElementById("texte_phase_3_mobile");
-    const phase_1_numero = document.getElementById("titre_phase_1_mobile");
-    const phase_2_numero = document.getElementById("titre_phase_2_mobile");
-    const phase_3_numero = document.getElementById("titre_phase_3_mobile");
-    const image = document.querySelector(".parcours_img");
-    const phase_3_container = document.getElementById(
-      "phase_3_container_mobile"
-    );
+  const links = document.querySelectorAll(".parcours_nav a");
+  const navBackground = document.querySelector(".nav-background");
+  const phase_1 = document.getElementById("phase_1_mobile");
+  const phase_2 = document.getElementById("phase_2_mobile");
+  const phase_3 = document.getElementById("phase_3_mobile");
+  const texte_1 = document.getElementById("texte_phase_1_mobile");
+  const texte_2 = document.getElementById("texte_phase_2_mobile");
+  const texte_3 = document.getElementById("texte_phase_3_mobile");
+  const phase_1_numero = document.getElementById("titre_phase_1_mobile");
+  const phase_2_numero = document.getElementById("titre_phase_2_mobile");
+  const phase_3_numero = document.getElementById("titre_phase_3_mobile");
+  const image = document.querySelector(".parcours_img");
+  const phase_3_container = document.getElementById("phase_3_container_mobile");
 
-    links.forEach((link) => {
-      link.addEventListener("click", function (e) {
-        e.preventDefault();
+  links.forEach((link) => {
+    link.addEventListener("click", function (e) {
+      e.preventDefault();
 
-        const linkWidth = this.offsetWidth;
-        const linkLeftOffset = this.offsetLeft;
-        navBackground.style.width = `${linkWidth}px`;
-        navBackground.style.transform = `translateX(${linkLeftOffset}px)`;
+      const linkWidth = this.offsetWidth;
+      const linkLeftOffset = this.offsetLeft;
+      navBackground.style.width = `${linkWidth}px`;
+      navBackground.style.transform = `translateX(${linkLeftOffset}px)`;
 
-        document
-          .querySelector(".parcours_nav a.active")
-          ?.classList.remove("active");
-        this.classList.add("active");
+      document
+        .querySelector(".parcours_nav a.active")
+        ?.classList.remove("active");
+      this.classList.add("active");
 
-        roleActif = this.getAttribute("data-role");
-        image.src = imagesParRole[roleActif][0];
+      roleActif = this.getAttribute("data-role");
+      image.src = imagesParRole[roleActif][0];
 
-        const role = this.getAttribute("data-role");
+      const role = this.getAttribute("data-role");
 
-        switch (role) {
-          case "medecin":
-            phase_1.textContent = "Préparation des joueurs";
-            texte_1.textContent =
-              "Préparation des étudiants. Le patient prend connaissance de sa fiche, et l'évaluateur de sa grille. Lorsqu'ils sont prêts, le médecin lance le chronomètre pour lire les consignes";
-            phase_2.textContent = "Simulation";
-            texte_2.textContent =
-              "Lorsqu'il est prêt, le médecin lance un nouveau chronomètre pour lancer la partie";
-            phase_3.textContent = "Résultat";
-            texte_3.textContent =
-              "L'évaluateur termine son évaluation, même après 8 minutes. Le médecin a ensuite accès à la grille et la correction détaillée";
-            phase_3_container.style.display = "flex";
-            phase_1_numero.textContent = "Phase 1/3";
-            phase_2_numero.textContent = "Phase 2/3";
-            phase_3_numero.textContent = "Phase 3/3";
-            break;
-          case "patient":
-            phase_1.textContent = "Préparation des joueurs";
-            texte_1.textContent = "Test tab 2";
-            phase_2.textContent = "Simulation";
-            texte_2.textContent = "Test tab 2";
-            phase_1_numero.textContent = "Phase 1/2";
-            phase_2_numero.textContent = "Phase 2/2";
-            phase_3_container.style.display = "none";
-            break;
-          case "evaluateur":
-            phase_1.textContent = "Préparation des joueurs";
-            texte_1.textContent = "Test tab 3";
-            phase_2.textContent = "Simulation";
-            texte_2.textContent = "Test tab 3";
-            phase_3.textContent = "Résultat";
-            texte_3.textContent = "Test tab 3";
-            phase_3_container.style.display = "flex";
-            phase_1_numero.textContent = "Phase 1/3";
-            phase_2_numero.textContent = "Phase 2/3";
-            phase_3_numero.textContent = "Phase 3/3";
-            break;
-        }
-      });
+      switch (role) {
+        case "medecin":
+          phase_1.textContent = "Préparation des joueurs";
+          texte_1.textContent =
+            "Préparation des étudiants. Le patient prend connaissance de sa fiche, et l'évaluateur de sa grille. Lorsqu'ils sont prêts, le médecin lance le chronomètre pour lire les consignes";
+          phase_2.textContent = "Simulation";
+          texte_2.textContent =
+            "Lorsqu'il est prêt, le médecin lance un nouveau chronomètre pour lancer la partie";
+          phase_3.textContent = "Résultat";
+          texte_3.textContent =
+            "L'évaluateur termine son évaluation, même après 8 minutes. Le médecin a ensuite accès à la grille et la correction détaillée";
+          phase_3_container.style.display = "flex";
+          phase_1_numero.textContent = "Phase 1/3";
+          phase_2_numero.textContent = "Phase 2/3";
+          phase_3_numero.textContent = "Phase 3/3";
+          break;
+        case "patient":
+          phase_1.textContent = "Préparation des joueurs";
+          texte_1.textContent = "Test tab 2";
+          phase_2.textContent = "Simulation";
+          texte_2.textContent = "Test tab 2";
+          phase_1_numero.textContent = "Phase 1/2";
+          phase_2_numero.textContent = "Phase 2/2";
+          phase_3_container.style.display = "none";
+          break;
+        case "evaluateur":
+          phase_1.textContent = "Préparation des joueurs";
+          texte_1.textContent = "Test tab 3";
+          phase_2.textContent = "Simulation";
+          texte_2.textContent = "Test tab 3";
+          phase_3.textContent = "Résultat";
+          texte_3.textContent = "Test tab 3";
+          phase_3_container.style.display = "flex";
+          phase_1_numero.textContent = "Phase 1/3";
+          phase_2_numero.textContent = "Phase 2/3";
+          phase_3_numero.textContent = "Phase 3/3";
+          break;
+      }
     });
-    document.querySelector(".parcours_nav a[data-role='medecin']").click();
-
-    if (links.length > 0) {
-      links[0].dispatchEvent(new Event("click"));
-    }
   });
-}
+  document.querySelector(".parcours_nav a[data-role='medecin']").click();
 
+  if (links.length > 0) {
+    links[0].dispatchEvent(new Event("click"));
+  }
+}
 function adjustBehaviorBasedOnScreenSize() {
   if (window.innerWidth < 1024) {
     changeTabMobile();
-  } else if (window.innerWidth >= 1024) {
+  } else {
     changeTab();
   }
 }
 
-adjustBehaviorBasedOnScreenSize();
+document.addEventListener("DOMContentLoaded", function () {
+  adjustBehaviorBasedOnScreenSize();
+});
 window.addEventListener("resize", adjustBehaviorBasedOnScreenSize);
