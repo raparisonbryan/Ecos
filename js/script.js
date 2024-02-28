@@ -119,7 +119,7 @@ window.addEventListener("scroll", () => {
 //Parcours
 const imagesParRole = {
   medecin: ["img/medecin-1.png", "img/medecin-2.png", "img/medecin-3.png"],
-  patient: ["img/medecin-1.png", "img/medecin-2.png", "img/medecin-3.png"],
+  patient: ["img/medecin-1.png", "img/medecin-2.png"],
   evaluateur: [
     "img/medecin-1.png",
     "img/medecin-2.png",
